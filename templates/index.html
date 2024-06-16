@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Audio Downloader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>YouTube Audio Downloader</h1>
+        <form id="url-form" method="post">
+            <label for="url">YouTube URL:</label>
+            <input type="url" id="url" name="url" placeholder="Enter YouTube URL" required>
+            <button type="submit">Preview & Download</button>
+        </form>
+        <div class="dialogue-box" id="dialogue-box">
+            <img id="preview-image" src="" alt="Video Preview">
+            <button id="download-button">Download</button>
+        </div>
+    </div>
+    <div class="overlay" id="overlay"></div>
+    <footer>Made with &#10084; by H!M4NSHU !!</footer>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        const urlForm = document.getElementById('url-form');
+        const dialogueBox = document.getElementById('dialogue-box');
+        const previewImage = document.getElementById('preview-image');
+        const overlay = document.getElementById('overlay');
+
+        urlForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const urlInput = document.getElementById('url').value.trim();
+            if (urlInput !== '') {
+                const imageUrl = 'https://w7.pngwing.com/pngs/133/474/png-transparent-computer-icons-preview-macos-others-blue-text-logo.png';
+                previewImage.src = imageUrl;
+                showPreviewDialogue();
+            }
+        });
+
+        function showPreviewDialogue() {
+            dialogueBox.classList.add('show');
+            overlay.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        overlay.addEventListener('click', function() {
+            hidePreviewDialogue();
+        });
+
+        function hidePreviewDialogue() {
+            dialogueBox.classList.remove('show');
+            overlay.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+    </script>
+</body>
+</html>
